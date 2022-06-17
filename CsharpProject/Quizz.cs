@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace CsharpProject
 {
-    internal class Quizz
+    public class Quizz
     {
+    
+
+        public static string[] GetQuestions(string file)
+        {
+            
+
+            string[] allQuestionsBrut = File.ReadAllLines(file);
+
+            return allQuestionsBrut;
+        }
     }
 }

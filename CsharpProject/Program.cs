@@ -30,3 +30,43 @@ StringReader sr = new StringReader();
 
 
 //CheckUser(identity);
+
+
+
+
+string[] allLines = Quizz.GetQuestions("QCM.txt");
+
+List<string> allLinesList = allLines.ToList();
+
+Question aQuestion = new Question();
+aQuestion.Answer = new List<string>();
+
+for (int i = 0; i < allLinesList.Count(); i++)
+{
+    if (allLinesList[i].StartsWith("Question"))
+    {
+
+        aQuestion.Statement = allLinesList[i];
+        //allLinesList.Remove(line);
+
+
+    }
+    else if (allLinesList[i] == string.Empty)
+    {
+        break;
+    }
+    else
+    {
+
+        aQuestion.Answer.Add(allLinesList[i]);
+
+    }
+
+}
+
+Console.WriteLine(aQuestion.Statement);
+
+foreach (var answer in aQuestion.Answer)
+{
+    Console.WriteLine(answer);
+}

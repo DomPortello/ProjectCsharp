@@ -8,5 +8,8 @@ namespace CsharpProject
 {
     internal class Question
     {
+        public int Number { get; set; }
+        public string Statement { get; set; }
+        public List<string> Answer { get; set; }
     }
 }
