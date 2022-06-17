@@ -16,5 +16,10 @@ namespace CsharpProject
         public string Text { get; set; }
         public char Letter { get; set; }
         public bool IsCorrect { get; set; }
+
+        public Answer(string text)
+        {
+            Text = text;
+        }
     }
 }

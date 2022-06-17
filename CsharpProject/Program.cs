@@ -10,15 +10,8 @@
 //string? firstName = Console.ReadLine();
 
 
-//try
-//{
-//    createNewUser(name, lastName);
-//}
-//catch (Exception e)
-//{
-//    Console.WriteLine(e.Message);
-//}
 
+<<<<<<< HEAD
 //Quizz quizz = new Quizz();
 //Quizz.Start(4);
 
@@ -58,3 +51,39 @@ for (int i = 0; i < allLinesList.Count(); i++)
     }
 }
 
+=======
+try
+{
+    createNewUser(name, lastName);
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}
+
+Quizz quizz = new Quizz();
+Quizz.Start(4);
+
+while (quizz.nbOfQuestions <= quizz.maxQuestions)
+{
+    AskQuestion;
+}
+
+
+CheckUser(identity);
+
+Quizz newQuizz = new Quizz();
+newQuizz.GetQuestions("QCM.txt");
+
+foreach (Question question in newQuizz.Questions)
+{
+    Console.WriteLine(question.Statement);
+    foreach (Answer answer in question.Answers)
+    {
+        Console.WriteLine(answer.Text);
+        Console.WriteLine(answer.Letter);
+        Console.WriteLine(answer.IsCorrect);
+    }
+    
+}
+>>>>>>> 686809190d72260224561d90cee0164ace43a994
