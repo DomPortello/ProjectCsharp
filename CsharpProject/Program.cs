@@ -1,13 +1,13 @@
 ﻿using CsharpProject;
 
-Console.WriteLine("Bienvenue sur le quizz de votre vie !");
+//Console.WriteLine("Bienvenue sur le quizz de votre vie !");
 
-Console.WriteLine();
+//Console.WriteLine();
 
-Console.WriteLine("Merci de saisir votre nom");
-string? lastName = Console.ReadLine();
-Console.WriteLine("Merci de saisir votre prénom");
-string? firstName = Console.ReadLine();
+//Console.WriteLine("Merci de saisir votre nom");
+//string? lastName = Console.ReadLine();
+//Console.WriteLine("Merci de saisir votre prénom");
+//string? firstName = Console.ReadLine();
 
 
 //try
@@ -37,35 +37,24 @@ string[] allLines = Quizz.GetQuestions("QCM.txt");
 
 List<string> allLinesList = allLines.ToList();
 
-Question aQuestion = new Question();
-aQuestion.Answer = new List<string>();
-
 for (int i = 0; i < allLinesList.Count(); i++)
 {
     if (allLinesList[i].StartsWith("Question"))
     {
+        Question question = new Question(allLinesList[i]);
+        question.Answer = new List<Answer>();
+        while (allLinesList[i] != string.Empty)
+        {
+            question.Answer.Add(new Answer(allLinesList[i]));
+        }
 
-        aQuestion.Statement = allLinesList[i];
-        //allLinesList.Remove(line);
+        Console.WriteLine(question.Statement);
 
+        foreach (var answer in question.Answer)
+        {
+            Console.WriteLine(answer.Text);
+        }
 
     }
-    else if (allLinesList[i] == string.Empty)
-    {
-        break;
-    }
-    else
-    {
-
-        aQuestion.Answer.Add(allLinesList[i]);
-
-    }
-
 }
 
-Console.WriteLine(aQuestion.Statement);
-
-foreach (var answer in aQuestion.Answer)
-{
-    Console.WriteLine(answer);
-}

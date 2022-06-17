@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HB\\Documents\\Jérémy\\ProjectCsharp\\CsharpProject\\CsharpProject.csproj",
+      "projectUniqueName": "C:\\Users\\HB\\Documents\\C#\\Exos\\CsharpProject\\CsharpProject\\CsharpProject.csproj",
       "projectName": "CsharpProject",
-      "projectPath": "C:\\Users\\HB\\Documents\\Jérémy\\ProjectCsharp\\CsharpProject\\CsharpProject.csproj",
+      "projectPath": "C:\\Users\\HB\\Documents\\C#\\Exos\\CsharpProject\\CsharpProject\\CsharpProject.csproj",
       "packagesPath": "C:\\Users\\HB\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HB\\Documents\\Jérémy\\ProjectCsharp\\CsharpProject\\obj\\",
+      "outputPath": "C:\\Users\\HB\\Documents\\C#\\Exos\\CsharpProject\\CsharpProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HB\\AppData\\Roaming\\NuGet\\NuGet.Config",

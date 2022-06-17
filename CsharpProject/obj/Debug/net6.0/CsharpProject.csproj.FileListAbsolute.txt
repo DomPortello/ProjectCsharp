@@ -13,3 +13,4 @@ C:\Users\HB\Documents\C#\Exos\CsharpProject\CsharpProject\obj\Debug\net6.0\refin
 C:\Users\HB\Documents\C#\Exos\CsharpProject\CsharpProject\obj\Debug\net6.0\CsharpProject.pdb
 C:\Users\HB\Documents\C#\Exos\CsharpProject\CsharpProject\obj\Debug\net6.0\CsharpProject.genruntimeconfig.cache
 C:\Users\HB\Documents\C#\Exos\CsharpProject\CsharpProject\obj\Debug\net6.0\ref\CsharpProject.dll
+C:\Users\HB\Documents\C#\Exos\CsharpProject\CsharpProject\bin\Debug\net6.0\QCM.txt
