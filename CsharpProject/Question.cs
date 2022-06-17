@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace CsharpProject
 {
-    internal class Question
+    public class Question
     {
         public int Number { get; set; }
         public string Statement { get; set; }
-        public List<string> Answer { get; set; }
+        public List<Answer> Answers { get; set; }
+
+        public Question(string statement)
+        {
+            Statement = statement;
+        }
     }
 }
