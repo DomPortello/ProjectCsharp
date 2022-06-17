@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace CsharpProject
 {
-    internal class Question
+    internal class FileManager
     {
-
     }
 }
