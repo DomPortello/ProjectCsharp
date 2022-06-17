@@ -5,9 +5,9 @@ Console.WriteLine("Bienvenue sur le quizz de votre vie !");
 Console.WriteLine();
 
 Console.WriteLine("Merci de saisir votre nom");
-string? name = Console.ReadLine();
-Console.WriteLine("Merci de saisir votre prénom");
 string? lastName = Console.ReadLine();
+Console.WriteLine("Merci de saisir votre prénom");
+string? firstName = Console.ReadLine();
 
 
 
