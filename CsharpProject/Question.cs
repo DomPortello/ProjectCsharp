@@ -15,6 +15,7 @@ namespace CsharpProject
         public Question(string statement)
         {
             Statement = statement;
+            Answers = new List<Answer>();
         }
     }
 }

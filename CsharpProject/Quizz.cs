@@ -19,19 +19,23 @@ namespace CsharpProject
 
         const string file = "QCM.txt";
 
+        //méthode pour stocker chaque question avec ces réponses dans un nouvel objet Question
         public void GetQuestions()
         {
             string[] allLines = File.ReadAllLines(file);
             List<string> allLinesList = allLines.ToList();
+            int nbQuestion = 0;
 
             for (int i = 0; i < allLinesList.Count; i++)
             {
-
                 if (allLinesList[i].StartsWith("Question"))
                 {
+                    nbQuestion++;
+
+                    //initialisation d'un nouvel objet Question
                     Question aQuestion = new(allLinesList[i])
                     {
-                        Answers = new List<Answer>()
+                        Number = nbQuestion,
                     };
 
                     for (int j = i; j < allLinesList.Count; j++)
@@ -63,37 +67,16 @@ namespace CsharpProject
                 }
             }
         }
-        internal void Play()
+
+        //Méthode permettant de faire une partie complète
+        public void Play()
         {
             DisplayQuizz();
             DisplayScore();
             DisplayWrongAnswers();
         }
 
-        private void DisplayWrongAnswers()
-        {
-            foreach (var ques in WrongQuestions)
-            {
-                Console.WriteLine(ques.Statement);
-                foreach (var wer in ques.Answers)
-                {
-                    if (wer.IsCorrect)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                    }
-                    Console.WriteLine(wer.Text);
-                    Console.ResetColor();
-                }
-            }
-        }
-
-        private void DisplayScore()
-        {
-            Console.Clear();
-            Console.WriteLine($"Vous avez obtenu un score de {CorrectAnswers}/{Questions.Count}");
-            Console.WriteLine();
-        }
-
+        //affichage de chaque question du quizz après réponse de l'utilisateur
         private void DisplayQuizz()
         {
 
@@ -129,6 +112,34 @@ namespace CsharpProject
             }
         }
 
+        //réaffichage des questions ayant obtenu une reponse fausse et mise en valeur de la ou les bonne(s) réponse(s)
+        private void DisplayWrongAnswers()
+        {
+            foreach (var question in WrongQuestions)
+            {
+                Console.WriteLine(question.Statement);
+
+                foreach (var answer in question.Answers)
+                {
+                    if (answer.IsCorrect)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    Console.WriteLine(answer.Text);
+                    Console.ResetColor();
+                }
+            }
+        }
+
+        //affichage du score
+        private void DisplayScore()
+        {
+            Console.Clear();
+            Console.WriteLine($"Vous avez obtenu un score de {CorrectAnswers}/{Questions.Count}");
+            Console.WriteLine();
+        }
+
+        //vérifications du format de la réponse saisie par l'utilisateur
         private void CheckFormat(string? givenAnswerRaw, Question question, List<char> choiceLetters)
         {
             if (givenAnswerRaw != null
@@ -163,14 +174,16 @@ namespace CsharpProject
             };
         }
 
+
+        //vérification si la réponse de l'utilisateur est juste
         private void CheckAnswer(string? givenAnswerRaw, Question question)
         {
             if (givenAnswerRaw != null && givenAnswerRaw.Length == question.NbCorrectAnswers)
             {
                 int compt = 0;
-                foreach (var rep in question.Answers)
+                foreach (var possibleAnswer in question.Answers)
                 {
-                    if (givenAnswerRaw.ToUpper().Contains(rep.Letter) && rep.IsCorrect == true)
+                    if (givenAnswerRaw.ToUpper().Contains(possibleAnswer.Letter) && possibleAnswer.IsCorrect == true)
                     {
                         compt++;
                     }

@@ -8,11 +8,7 @@ namespace CsharpProject
 {
     public class Answer
     {
-        public Answer()
-        {
-        }
-
-        public string Text { get; set; }
+        public string? Text { get; set; }
         public char Letter { get; set; }
         public bool IsCorrect { get; set; }
     }

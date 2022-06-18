@@ -11,6 +11,7 @@ namespace CsharpProject
         public string? FirstName { get; private set; }
         public string? LastName { get; private set; }
 
+        //stockage des attributs de l'utilisateur dans l'instance courante
         public void SetFullName()
         {
             GetFullName(out string? firstName, out string? lastName);
@@ -18,6 +19,7 @@ namespace CsharpProject
             LastName = lastName;
         }
 
+        //vérification du format pour les 2 attributs de l'utilisateur
         private void CheckFormat(string? name)
         {
             if (name != null)
@@ -32,6 +34,8 @@ namespace CsharpProject
             }           
         }
 
+
+        //récupération du nom et du prénom saisis
         private void GetFullName(out string? firstName, out string? lastName)
         {
             bool isFormatOk = false;
