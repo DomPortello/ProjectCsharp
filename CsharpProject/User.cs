@@ -8,53 +8,69 @@ namespace CsharpProject
 {
     public class User
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string? FirstName { get; private set; }
+        public string? LastName { get; private set; }
 
-        public static void VerifierFormat(string name)
+        public void SetFullName()
         {
-            if (!(name.Any(char.IsLetter)))
-            {
-                throw new ArgumentException("Votre nom et prénom ne doivent contenir que des lettres");
-            }  
-        }
-        public void SaisirFirstName(out string firstName)
-        {
-            string? reponse;
-            try
-            {
-                Console.WriteLine("Saisir votre nom");
-                reponse = Console.ReadLine();
-                VerifierFormat(reponse);
-                firstName = reponse;
-
-            }
-            catch (ArgumentException ex)
-            {
-                firstName = ex.Message;
-                Console.WriteLine(firstName);
-                SaisirFirstName(out string test);
-            }
+            GetFullName(out string? firstName, out string? lastName);
+            FirstName = firstName;
+            LastName = lastName;
         }
 
-        public void SaisirLastName(out string lastName)
+        private void CheckFormat(string? name)
         {
-            string? reponse;
-            try
+            if (name != null)
             {
-                Console.WriteLine("Saisir votre prénom");
-                reponse = Console.ReadLine();
-                VerifierFormat(reponse);
-                lastName = reponse;
-
-            }
-            catch (ArgumentException ex)
-            {
-                lastName = ex.Message;
-                Console.WriteLine(lastName);
-                SaisirLastName(out string last);
-            };
+                foreach (char letter in name)
+                {
+                    if (!(char.IsLetter(letter)))
+                    {
+                        throw new ArgumentException("Votre nom et prénom ne doivent contenir que des lettres");
+                    }
+                }
+            }           
         }
 
+        private void GetFullName(out string? firstName, out string? lastName)
+        {
+            bool isFormatOk = false;
+            firstName = string.Empty;
+            lastName = string.Empty;
+            
+            while (!isFormatOk)
+            {
+                try
+                {
+                    Console.WriteLine("Veuillez saisir votre prénom");
+                    string? givenFirstName = Console.ReadLine();
+                    CheckFormat(givenFirstName);
+                    firstName = givenFirstName;
+                    isFormatOk = true;
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            isFormatOk = false;
+
+            while (!isFormatOk)
+            {
+                try
+                {
+                    Console.WriteLine("Veuillez saisir votre nom");
+                    string? givenLastName = Console.ReadLine();
+                    CheckFormat(givenLastName);
+                    lastName = givenLastName;
+                    isFormatOk = true;
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
     }
 }
