@@ -8,10 +8,9 @@ namespace CsharpProject
 {
     public class Quizz
     {
-        public List<Question> Questions { get; set; }
-        public List<Question> WrongQuestions { get; set; }
-
-        public int CorrectAnswers { get; set; }
+        public List<Question> Questions { get; }
+        public List<Question> WrongQuestions { get; }
+        public int CorrectAnswers { get; private set; }
         public Quizz()
         {
             Questions = new List<Question>();
@@ -25,19 +24,21 @@ namespace CsharpProject
             string[] allLines = File.ReadAllLines(file);
             List<string> allLinesList = allLines.ToList();
 
-            for (int i = 0; i < allLinesList.Count(); i++)
+            for (int i = 0; i < allLinesList.Count; i++)
             {
 
                 if (allLinesList[i].StartsWith("Question"))
                 {
-                    Question aQuestion = new Question(allLinesList[i]);
-                    aQuestion.Answers = new List<Answer>();
+                    Question aQuestion = new(allLinesList[i])
+                    {
+                        Answers = new List<Answer>()
+                    };
 
-                    for (int j = i; j < allLinesList.Count(); j++)
+                    for (int j = i; j < allLinesList.Count; j++)
                     {
                         if ((allLinesList[j] != string.Empty) && !(allLinesList[j].StartsWith("Question")))
                         {
-                            Answer anAnswer = new Answer();
+                            Answer anAnswer = new();
                             if (allLinesList[j][0] == '*')
                             {
                                 anAnswer.IsCorrect = true;
@@ -58,12 +59,11 @@ namespace CsharpProject
                             break;
                         }
                     }
-
                     Questions.Add(aQuestion);
                 }
             }
         }
-        internal void Start()
+        internal void Play()
         {
             DisplayQuizz();
             DisplayScore();
@@ -90,69 +90,87 @@ namespace CsharpProject
         private void DisplayScore()
         {
             Console.Clear();
-            Console.WriteLine($"Vous avez obtenu un score de {CorrectAnswers}/{Questions.Count()}");
+            Console.WriteLine($"Vous avez obtenu un score de {CorrectAnswers}/{Questions.Count}");
             Console.WriteLine();
         }
 
         private void DisplayQuizz()
         {
-            List<char> choices = new List<char>();
+
             foreach (var question in Questions)
             {
-                Console.WriteLine(question.Statement);
-                foreach (var answer in question.Answers)
+                List<char> choiceLetters = new();
+                bool isFormatOk = false;
+                do
                 {
-                    Console.WriteLine(answer.Text);
-                    choices.Add(answer.Letter);
-                }
-                string? reponse = Console.ReadLine();
-                List<char> repo = reponse.ToUpper().ToList<char>();
-                try
-                {
-                    checkFormat(reponse, repo, question, choices);
-                }
-                catch (ArgumentOutOfRangeException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-                checkAnswer(question, reponse);
+                    Console.ResetColor();
+                    Console.WriteLine("\n" + question.Statement);
+
+                    foreach (var answer in question.Answers)
+                    {
+                        Console.WriteLine(answer.Text);
+                        choiceLetters.Add(answer.Letter);
+                    }
+
+                    Console.WriteLine("\nBonne(s) réponse(s) ? :");
+                    string? givenAnswerRaw = Console.ReadLine();
+
+                    try
+                    {
+                        CheckFormat(givenAnswerRaw, question, choiceLetters);
+                        CheckAnswer(givenAnswerRaw, question);
+                        isFormatOk = true;
+                    }
+                    catch (ArgumentException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                } while (!isFormatOk);
             }
         }
 
-
-        private void checkFormat(string reponse, List<char> repo, Question question, List<char> choices)
+        private void CheckFormat(string? givenAnswerRaw, Question question, List<char> choiceLetters)
         {
-            if (reponse != null && reponse.Any(char.IsLetter) && reponse.Count() <= question.Answers.Count())
+            if (givenAnswerRaw != null
+                && givenAnswerRaw.Any(char.IsLetter)
+                && givenAnswerRaw.Length <= question.Answers.Count
+               )
             {
-                if (repo.Distinct().Count() == repo.Count())
+                List<char> givenAnswerLetters = givenAnswerRaw.ToUpper().ToList<char>();
+
+                if (givenAnswerLetters.Distinct().Count() == givenAnswerLetters.Count)
                 {
-                    foreach (var lett in repo)
+                    foreach (var letter in givenAnswerLetters)
                     {
-                        if (!(choices.Contains(lett)))
+                        if (!(choiceLetters.Contains(letter)))
                         {
-                            throw new ArgumentOutOfRangeException("Merci de mettre les bonnes lettres pour que la réponse soit comptabilisée.");
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            throw new ArgumentException("Merci de mettre les bonnes lettres pour que la réponse soit comptabilisée.");
+
                         }
                     }
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Merci de ne pas mettre plusieurs fois la même lettre.");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    throw new ArgumentException("Merci de ne pas mettre plusieurs fois la même lettre.");
                 }
             }
             else
             {
-                throw new ArgumentOutOfRangeException("Merci de respecter le format de réponse qui est en majuscules sans espaces");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                throw new ArgumentException("Merci de respecter le format de réponse qui est en majuscules sans espaces");
             };
         }
 
-        private void checkAnswer(Question? question, string? reponse)
+        private void CheckAnswer(string? givenAnswerRaw, Question question)
         {
-            if (reponse.Count() == question.NbCorrectAnswers)
+            if (givenAnswerRaw != null && givenAnswerRaw.Length == question.NbCorrectAnswers)
             {
                 int compt = 0;
                 foreach (var rep in question.Answers)
                 {
-                    if (reponse.Contains(rep.Letter) && rep.IsCorrect == true)
+                    if (givenAnswerRaw.ToUpper().Contains(rep.Letter) && rep.IsCorrect == true)
                     {
                         compt++;
                     }

@@ -9,7 +9,7 @@ namespace CsharpProject
     public class Question
     {
         public int Number { get; set; }
-        public string Statement { get; set; }
+        public string Statement { get; }
         public List<Answer> Answers { get; set; }
         public int NbCorrectAnswers { get; set; }
         public Question(string statement)

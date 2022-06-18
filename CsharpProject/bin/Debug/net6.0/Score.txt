@@ -1,2 +1,5 @@
 Date	Nom	Score	Erreurs
-17/06/2022 	 gg 	 1/10 	 0,0,0,0,0,0,0,0,0,
+18/06/2022 	 QQQQ 	 1/10 	 0,0,0,0,0,0,0,0,0,
+18/06/2022 	 ZZZZ 	 4/10 	 0,0,0,0,0,0,
+18/06/2022 	 Votre nom et prénom ne doivent contenir que des lettres RR 	 0/10 	 0,0,0,0,0,0,0,0,0,0,
+18/06/2022 	 Votre nom et prénom ne doivent contenir que des lettres VV 	 4/10 	 0,0,0,0,0,0,

@@ -1,8 +1,8 @@
 ﻿using CsharpProject;
 
-Console.WriteLine("Bienvenue sur le quizz de votre vie !");
+Console.WriteLine("Bienvenue sur le quizz de votre vie !\n");
 
-Console.WriteLine();
+//Console.WriteLine();
 
 User user = new User();
 
@@ -15,8 +15,7 @@ Console.Clear();
 
 Quizz quizz = new Quizz();
 quizz.GetQuestions();
-Console.WriteLine(quizz.Questions.Count());
-quizz.Start();
+quizz.Play();
 
 Stats stats = new Stats();
 stats.WriteScore(quizz, user);

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HB\\Documents\\C#\\Exos\\CsharpProject\\CsharpProject\\CsharpProject.csproj": {}
+    "D:\\Hillaz\\Dev\\CSharp-projects\\ProjectCsharp\\CsharpProject\\CsharpProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HB\\Documents\\C#\\Exos\\CsharpProject\\CsharpProject\\CsharpProject.csproj": {
+    "D:\\Hillaz\\Dev\\CSharp-projects\\ProjectCsharp\\CsharpProject\\CsharpProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HB\\Documents\\C#\\Exos\\CsharpProject\\CsharpProject\\CsharpProject.csproj",
+        "projectUniqueName": "D:\\Hillaz\\Dev\\CSharp-projects\\ProjectCsharp\\CsharpProject\\CsharpProject.csproj",
         "projectName": "CsharpProject",
-        "projectPath": "C:\\Users\\HB\\Documents\\C#\\Exos\\CsharpProject\\CsharpProject\\CsharpProject.csproj",
-        "packagesPath": "C:\\Users\\HB\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HB\\Documents\\C#\\Exos\\CsharpProject\\CsharpProject\\obj\\",
+        "projectPath": "D:\\Hillaz\\Dev\\CSharp-projects\\ProjectCsharp\\CsharpProject\\CsharpProject.csproj",
+        "packagesPath": "C:\\Users\\hilla\\.nuget\\packages\\",
+        "outputPath": "D:\\Hillaz\\Dev\\CSharp-projects\\ProjectCsharp\\CsharpProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HB\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hilla\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

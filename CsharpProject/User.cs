@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CsharpProject
 {
-    internal class User
+    public class User
     {
-        public string FirstName { get;  set; }
-        public string LastName { get;  set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public static void VerifierFormat(string name)
         {
