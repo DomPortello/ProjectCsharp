@@ -8,6 +8,11 @@
 
         const string filePath = @"..\..\..\.\Score.txt";
 
+        public Stats()
+        {
+            GoodPercents = new SortedList<int, double>();
+        }
+
         //écriture du score d'une partie dans un fichier texte
         public static void WriteScore(Quizz quizz, User user)
         {
@@ -44,14 +49,32 @@
                 allErrors = allErrors.Concat(scoreDetails.ListErrors).ToList();
             }
 
+            int nbQuestions = int.Parse(scoreDetailsList[0].Score.Split('/')[1]);
+
+            for (int i = 1; i <= nbQuestions; i++)
+            {
+                int count = 0;
+                for (int j = 0; j < allErrors.Count; j++)
+                {
+                    if (allErrors[j] == i)
+                    {
+                        count++;
+                    }
+
+                    
+                }
+                double percent = (100 - count * 100 / TotalGames);
+                GoodPercents.Add(i, percent);
+            }
+
+            //Old version
             //grouper les erreurs par numero de questions
             //dictionnaire avec le numero de question comme clé et le % de bonnes réponses sur la question
+            /*
             var goodPercentsDic = allErrors.GroupBy(i => i)
                                   .ToDictionary(i => i.Key, i => (double)(100 - (i.Count() * 100 / TotalGames)));
-            //TODO: optimize
-            GoodPercents = new SortedList<int, double>(goodPercentsDic);
 
-            int nbQuestions = int.Parse(scoreDetailsList[0].Score.Split('/')[1]);
+            GoodPercents = new SortedList<int, double>(goodPercentsDic);
 
             for (int i = 1; i <= nbQuestions; i++)
             {
@@ -60,9 +83,10 @@
                     GoodPercents[i] = 100;
                 }
             }
+            */
 
             AverageScore = Math.Round((sumScore / TotalGames), 2).ToString() + '/'
-                           + int.Parse(scoreDetailsList[0].Score.Split('/')[1]);
+                           + nbQuestions;
         }
 
         public List<ScoreDetails> GetScoresUser(User user)
@@ -81,7 +105,7 @@
                     {
                         allScoresUser.Add(score);
                     }
-                }              
+                }
             }
 
             foreach (var scoreDetailsRaw in allScoresUser)
@@ -119,7 +143,7 @@
                     s += $"Question { test.Key} : {Math.Round((test.Value), 2)}% \n";
                 }
             }
-            
+
             return $"\nNombre total de jeux : {TotalGames}\n\nScore moyen : {AverageScore}\n\n{s}";
         }
     }
