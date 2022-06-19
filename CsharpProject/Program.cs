@@ -11,10 +11,13 @@ quizz.Play();
 
 Stats.WriteScore(quizz, user);
 
-Tools.YesOrNoQuestion("Voulez-vous voir vos statistiques ?");
-Stats stats = new Stats();
-stats.GetStatsUser(user);
-Console.WriteLine(stats);
+bool wantStats = Tools.YesOrNoQuestion("Voulez-vous voir vos statistiques ?");
+if (wantStats)
+{
+    Stats stats = new Stats();
+    stats.GetStatsUser(user);
+    Console.WriteLine(stats);
+}
 
 Tools.ExitQuestion();
 Environment.Exit(0);

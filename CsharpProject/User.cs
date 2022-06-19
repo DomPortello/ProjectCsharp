@@ -19,22 +19,6 @@ namespace CsharpProject
             LastName = lastName;
         }
 
-        //vérification du format pour les 2 attributs de l'utilisateur
-        private void CheckFormat(string? name)
-        {
-            if (name != null)
-            {
-                foreach (char letter in name)
-                {
-                    if (!(char.IsLetter(letter)))
-                    {
-                        throw new ArgumentException("Votre nom et prénom ne doivent contenir que des lettres");
-                    }
-                }
-            }           
-        }
-
-
         //récupération du nom et du prénom saisis
         private void GetFullName(out string? firstName, out string? lastName)
         {
@@ -48,7 +32,10 @@ namespace CsharpProject
                 {
                     Console.WriteLine("Veuillez saisir votre prénom");
                     string? givenFirstName = Console.ReadLine();
-                    CheckFormat(givenFirstName);
+                    Tools.CheckFormatLettersOnly(
+                        givenFirstName,
+                        "Votre prénom ne doit contenir que des lettres"
+                        );
                     firstName = givenFirstName;
                     isFormatOk = true;
                 }
@@ -66,7 +53,10 @@ namespace CsharpProject
                 {
                     Console.WriteLine("Veuillez saisir votre nom");
                     string? givenLastName = Console.ReadLine();
-                    CheckFormat(givenLastName);
+                    Tools.CheckFormatLettersOnly(
+                        givenLastName,
+                        "Votre nom ne doit contenir que des lettres"
+                        );
                     lastName = givenLastName;
                     isFormatOk = true;
                 }

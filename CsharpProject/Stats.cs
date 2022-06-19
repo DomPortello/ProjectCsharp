@@ -8,11 +8,6 @@
 
         const string filePath = @"..\..\..\.\Score.txt";
 
-        public Stats()
-        {
-            GoodPercents = new SortedList<int, double>();
-        }
-
         //écriture du score d'une partie dans un fichier texte
         public static void WriteScore(Quizz quizz, User user)
         {
@@ -24,18 +19,28 @@
             }
 
             string nbQuestion = "";
+
             foreach (var wrongQues in quizz.WrongQuestions)
             {
                 nbQuestion += wrongQues.Number + ",";
             }
+
             nbQuestion = nbQuestion.Remove(nbQuestion.Length - 1);
-            sw.WriteLine($"{DateTime.Today.ToShortDateString()} \t {user.FirstName} {user.LastName} \t {quizz.CorrectAnswers}/{quizz.Questions.Count} \t {nbQuestion}");
+
+            sw.WriteLine(
+                $"{DateTime.Today.ToShortDateString()} \t " +
+                $"{user.FirstName} {user.LastName} \t " +
+                $"{quizz.CorrectAnswers}/{quizz.Questions.Count} \t " +
+                $"{nbQuestion}"
+                );
+
             File.AppendAllText(filePath, sw.ToString());
         }
 
         //calcul des statistique d'un joueur
         public void GetStatsUser(User user)
         {
+            GoodPercents = new SortedList<int, double>();
             List<ScoreDetails> scoreDetailsList = GetScoresUser(user);
             double sumScore = 0;
             List<int> allErrors = new List<int>();
@@ -85,8 +90,7 @@
             }
             */
 
-            AverageScore = Math.Round((sumScore / TotalGames), 2).ToString() + '/'
-                           + nbQuestions;
+            AverageScore = Math.Round((sumScore / TotalGames), 2).ToString() + '/' + nbQuestions;
         }
 
         public List<ScoreDetails> GetScoresUser(User user)

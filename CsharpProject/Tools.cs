@@ -8,6 +8,21 @@ namespace CsharpProject
 {
     public static class Tools
     {
+        //vérification string avec uniquement des lettres
+        public static void CheckFormatLettersOnly(string? s, string message)
+        {
+            if (s != null)
+            {
+                foreach (char letter in s)
+                {
+                    if (!(char.IsLetter(letter)))
+                    {
+                        throw new ArgumentException(message + "\n");
+                    }
+                }
+            }
+        }
+
         public static void ExitQuestion()
         {
             ConsoleKeyInfo cki;
@@ -20,7 +35,7 @@ namespace CsharpProject
             while (cki.Key != ConsoleKey.Q);
         }
 
-        public static void YesOrNoQuestion(string question)
+        public static bool YesOrNoQuestion(string question)
         {
             ConsoleKeyInfo cki;
             Console.Write($"\n{question} (O/N)\n\n");
@@ -30,6 +45,13 @@ namespace CsharpProject
             }
 
             while (cki.Key != ConsoleKey.O && cki.Key != ConsoleKey.N);
+
+            if (cki.Key == ConsoleKey.O)
+            {
+                return true;
+            }
+
+            return false;           
         }
     }
 }
