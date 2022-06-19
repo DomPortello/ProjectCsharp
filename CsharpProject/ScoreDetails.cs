@@ -9,9 +9,9 @@ namespace CsharpProject
     public class ScoreDetails
     {
         public DateTime Date { get; set; }
-        public string Name { get; set; }
-        public string Score { get; set; }
-        public List<int> ListErrors { get; set; }
+        public string? Name { get; set; }
+        public string? Score { get; set; }
+        public List<int>? ListErrors { get; set; }
 
 
 

@@ -3,8 +3,8 @@
     public class Stats
     {
         public int TotalGames { get; set; }
-        public string AverageScore { get; set; }
-        public SortedList<int, double> GoodPercents { get; set; }
+        public string? AverageScore { get; set; }
+        public SortedList<int, double>? GoodPercents { get; set; }
 
         const string filePath = @"..\..\..\.\Score.txt";
 
@@ -75,10 +75,13 @@
 
             foreach (var score in allLines)
             {
-                if (score.Contains(user.FirstName) && score.Contains(user.LastName))
+                if (user.FirstName != null && user.LastName != null)
                 {
-                    allScoresUser.Add(score);
-                }
+                    if (score.Contains(user.FirstName) && score.Contains(user.LastName))
+                    {
+                        allScoresUser.Add(score);
+                    }
+                }              
             }
 
             foreach (var scoreDetailsRaw in allScoresUser)
@@ -107,12 +110,17 @@
 
         public override string ToString()
         {
-            string s = string.Empty;
-            foreach (var test in GoodPercents)
+            string s = "Pourcentages de bonnes réponses par question :\n";
+
+            if (GoodPercents != null)
             {
-                s += $"Question { test.Key} : {Math.Round((test.Value), 2)}% de bonnes réponses \n";
+                foreach (var test in GoodPercents)
+                {
+                    s += $"Question { test.Key} : {Math.Round((test.Value), 2)}% \n";
+                }
             }
-            return $"Nombre total de jeux : {TotalGames}\nScore moyen : {AverageScore}\n{s}";
+            
+            return $"\nNombre total de jeux : {TotalGames}\n\nScore moyen : {AverageScore}\n\n{s}";
         }
     }
 }
